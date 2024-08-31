@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <sidebar-menu></sidebar-menu>
+
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
@@ -35,8 +37,11 @@
 
 <script>
 
+import SidebarMenu from "@/components/SidebarMenu.vue";
+
 export default {
   name: 'MainMenu',
+  components: {SidebarMenu},
 
   setup() {
     return {}
