@@ -26,8 +26,8 @@
         class="mb-5"
         cols="12"
       >
-        <v-btn>Imputar Dados</v-btn>
-
+        <router-link to="/input_data">
+          <v-btn>Imputar Dados</v-btn></router-link>
       </v-col>
     </v-row>
   </v-container>
@@ -38,8 +38,9 @@
 export default {
   name: 'MainMenu',
 
-  data: () => ({
+  setup() {
+    return {}
+  },
 
-  }),
 }
 </script>
