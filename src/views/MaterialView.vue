@@ -91,9 +91,18 @@ export default {
     const creationMaterialTitle = ref("Novo Material");
     const creationMaterialSubtitle = ref("Preencha o nome e a constante do material.");
 
+    function formatEmptyMaterial() {
+      emptyMaterial.value = {
+        name: "-", constant: "0.0"
+      }
+
+    }
     function hideForm(actions) {
       console.log("create")
-      createMaterial(actions['payload']);
+      if(actions['payload']) {
+        createMaterial(actions['payload']);
+      }
+      formatEmptyMaterial()
     }
 
     return {
@@ -102,7 +111,8 @@ export default {
       creationMaterialTitle,
       creationMaterialSubtitle,
       loading,
-      hideForm
+      hideForm,
+      formatEmptyMaterial
     };
   },
 }
