@@ -37,24 +37,32 @@
         </v-card>
     </v-row>
   </v-container>
+  <v-dialog v-model="showProcessedDataDialog" persistent>
+      <processed-data @dialog_close="closeProcessedData"
+        :radiation-level="parseFloat(radiationLevel)" :altitude="parseFloat(altitude)"></processed-data>
+    </v-dialog>
 </template>
 
 <script>
 import { ref } from 'vue';
 import SidebarMenu from "@/components/SidebarMenu.vue";
+import ProcessedData from "@/components/ProcessedData.vue";
 
 export default {
   name: 'InputDataView',
-  components: {SidebarMenu},
+  components: {ProcessedData, SidebarMenu},
 
   setup() {
     const radiationLevel = ref(null);
     const altitude = ref(null);
 
-    const generateData = () => {
-      console.log('radiacao:', radiationLevel.value);
-      console.log('altra:', altitude.value);
-    };
+    const showProcessedDataDialog = ref(false)
+    const closeProcessedData = () => showProcessedDataDialog.value = false
+
+
+    function generateData() {
+      showProcessedDataDialog.value = true
+    }
 
     const rules = {
       float: value => {
@@ -70,7 +78,9 @@ export default {
       radiationLevel,
       altitude,
       generateData,
-      rules
+      rules,
+      showProcessedDataDialog,
+      closeProcessedData
     };
   },
 };
