@@ -29,7 +29,15 @@
         cols="12"
       >
         <router-link to="/input_data">
-          <v-btn>Imputar Dados</v-btn></router-link>
+          <v-btn>Gerar Dados</v-btn></router-link>
+      </v-col>
+
+      <v-col
+        class="mb-5"
+        cols="12"
+      >
+        <router-link to="/materials">
+          <v-btn>Materiais</v-btn></router-link>
       </v-col>
     </v-row>
   </v-container>

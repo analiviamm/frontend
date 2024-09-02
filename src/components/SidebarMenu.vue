@@ -11,7 +11,7 @@
       <div class="sidebar-menu">
         <v-img
           :src="require('../assets/logoime.png')"
-          style="width: 280px; height: 200px; margin-top: -80px; margin-bottom: -60px;"
+          style="width: 280px; height: 200px; margin-top: -300px; margin-bottom: -60px;"
         />
         <router-link to="/" v-slot="{ navigate }" style="text-decoration: none">
           <v-btn role="link" @click="navigate" class="list-link">
@@ -21,6 +21,11 @@
         <router-link to="/input_data" v-slot="{ navigate }" style="text-decoration: none">
           <v-btn role="link" @click="navigate" class="list-link">
             Imputar Dados
+          </v-btn>
+        </router-link>
+        <router-link to="/materials" v-slot="{ navigate }" style="text-decoration: none">
+          <v-btn role="link" @click="navigate" class="list-link">
+            Materiais
           </v-btn>
         </router-link>
         <v-btn icon @click="toggleDrawer" class="close-button">
