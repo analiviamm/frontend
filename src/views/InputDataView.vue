@@ -1,7 +1,6 @@
 <template>
   <v-container class="input-container">
     <sidebar-menu></sidebar-menu>
-
     <v-row class="justify-center">
       <v-card class="pa-4 input-card" outlined>
         <v-card-title>
@@ -49,13 +48,13 @@ import ProcessedData from "@/components/ProcessedData.vue";
 
 export default {
   name: 'InputDataView',
-  components: {ProcessedData, SidebarMenu},
+  components: { ProcessedData, SidebarMenu },
 
   setup() {
     const radiationLevel = ref(null);
     const altitude = ref(null);
-
     const showProcessedDataDialog = ref(false);
+
     const closeProcessedData = () => showProcessedDataDialog.value = false;
 
     function generateData() {
@@ -86,13 +85,15 @@ export default {
 
 <style scoped>
 .input-container {
-  padding: 50px 60px;
+    padding: 50px 60px 10px 60px;
+    position: relative; /* Adicionado para garantir que o conteúdo não sobreponha o sidebar */
 }
 
 .input-card {
   background-color: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative; /* Adicionado para garantir que o card não seja sobreposto pelo sidebar */
 }
 
 .input-title {
