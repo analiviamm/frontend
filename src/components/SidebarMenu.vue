@@ -20,7 +20,7 @@
         </router-link>
         <router-link to="/input_data" v-slot="{ navigate }" style="text-decoration: none">
           <v-btn role="link" @click="navigate" class="list-link">
-            Imputar Dados
+            Gerar Dados
           </v-btn>
         </router-link>
         <router-link to="/materials" v-slot="{ navigate }" style="text-decoration: none">

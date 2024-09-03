@@ -1,46 +1,45 @@
 <template>
-  <v-container>
+  <v-container class="input-container">
     <sidebar-menu></sidebar-menu>
 
-    <v-row>
-        <v-card class="pa-4" outlined>
-          <v-card-title>
-            <h2>Input dos Dados</h2>
-          </v-card-title>
-          <v-card-subtitle>
-            <p>Digite o valor do nível de radiação, em µSv/h,
-             e a altitude do drone para esse nível, em m.</p>
-          </v-card-subtitle>
-          <v-card-text>
-            <v-form>
-              <v-text-field
-                v-model="radiationLevel"
-                label="Nível de Radiação (µSv/h)"
-                outlined
-                dense
-                type="number"
-                :rules="[rules.float]"
-                class="mb-4"
-              />
-              <v-text-field
-                v-model="altitude"
-                label="Altitude (m)"
-                outlined
-                dense
-                type="number"
-                :rules="[rules.float]"
-                class="mb-4"
-              />
-              <v-btn @click="generateData" color="primary">Gerar Dados</v-btn>
-            </v-form>
-          </v-card-text>
-        </v-card>
+    <v-row class="justify-center">
+      <v-card class="pa-4 input-card" outlined>
+        <v-card-title>
+          <h2 class="input-title">Input dos Dados</h2>
+        </v-card-title>
+        <v-card-subtitle>
+          <p class="input-subtitle">Digite o valor do nível de radiação, em µSv/h, e a altitude do drone para esse nível, em m.</p>
+        </v-card-subtitle>
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              v-model="radiationLevel"
+              label="Nível de Radiação (µSv/h)"
+              outlined
+              dense
+              type="number"
+              :rules="[rules.float]"
+              class="input-field"
+            />
+            <v-text-field
+              v-model="altitude"
+              label="Altitude (m)"
+              outlined
+              dense
+              type="number"
+              :rules="[rules.float]"
+              class="input-field"
+            />
+            <v-btn @click="generateData" class="input-btn">GERAR DADOS</v-btn>
+          </v-form>
+        </v-card-text>
+      </v-card>
     </v-row>
-  </v-container>
-  <v-dialog v-model="showProcessedDataDialog" persistent>
+    <v-dialog v-model="showProcessedDataDialog" persistent>
       <processed-data @dialog_close="closeProcessedData"
         :radiation-level="parseFloat(radiationLevel)" :altitude="parseFloat(altitude)"></processed-data>
     </v-dialog>
+  </v-container>
 </template>
 
 <script>
@@ -56,23 +55,22 @@ export default {
     const radiationLevel = ref(null);
     const altitude = ref(null);
 
-    const showProcessedDataDialog = ref(false)
-    const closeProcessedData = () => showProcessedDataDialog.value = false
-
+    const showProcessedDataDialog = ref(false);
+    const closeProcessedData = () => showProcessedDataDialog.value = false;
 
     function generateData() {
-      showProcessedDataDialog.value = true
+      showProcessedDataDialog.value = true;
     }
 
     const rules = {
       float: value => {
-        let parsedValue = parseFloat(value)
+        let parsedValue = parseFloat(value);
         if ((parsedValue && 0 <= parsedValue) || isNaN(parsedValue)) {
-          return true
+          return true;
         }
-        return 'Digite um valor válido'
+        return 'Digite um valor válido';
       },
-    }
+    };
 
     return {
       radiationLevel,
@@ -86,11 +84,43 @@ export default {
 };
 </script>
 
-<style>
-
-.v-card {
-  max-width: 800px; /* Ajuste conforme necessário */
-  margin: auto;
+<style scoped>
+.input-container {
+  padding: 50px 60px;
 }
 
+.input-card {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-title {
+  font-family: Poppins-Bold;
+  font-size: 22px;
+  color: #2596be;
+}
+
+.input-subtitle {
+  font-family: Poppins-Light;
+  font-size: 16px;
+  color: #7A7A7A;
+}
+
+.input-field {
+  margin-bottom: 16px;
+  border-radius: 10px;
+}
+
+.input-btn {
+  font-family: Poppins-Bold;
+  background-color: #2596be;
+  color: #FFFFFF;
+  border-radius: 10px;
+  text-transform: none;
+}
+
+.input-btn:hover {
+  background-color: #1a76d2;
+}
 </style>

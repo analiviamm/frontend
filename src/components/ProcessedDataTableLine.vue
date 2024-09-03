@@ -1,15 +1,15 @@
 <template>
   <v-row class="table-row">
-    <v-col class ="col" cols="2">
+    <v-col class="col" cols="2">
       <span>{{ material }}</span>
     </v-col>
-    <v-col class ="col" cols="2">
+    <v-col class="col" cols="2">
       <span>{{ constant }}</span>
     </v-col>
-    <v-col class ="col" cols="2">
+    <v-col class="col" cols="2">
       <span>{{ activity }}</span>
     </v-col>
-    <v-col class ="col" cols="6">
+    <v-col class="col" cols="6">
       <span>{{ precaution }}</span>
     </v-col>
   </v-row>
@@ -36,15 +36,14 @@ const precaution = "gskfjdlkfgndjfgndkjfgnkdjfgn"
   border-bottom: 1px solid #ddd;
   display: flex;
   align-items: center;
+  background-color: #ffffff;
 }
-
 
 .col {
-  flex: 1; /* Faz com que todas as colunas tenham a mesma largura */
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center; /* Opcional: centraliza o conteúdo das colunas */
-  word-break: break-word; /* Garante que o texto não saia da coluna */
+  justify-content: center;
+  word-break: break-word;
 }
-
 </style>

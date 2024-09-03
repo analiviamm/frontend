@@ -15,13 +15,12 @@
                 <v-form v-model="valid" ref="form" lazy-validation>
                   <v-row dense class="dense-form">
                     <v-col cols="12" xs="12" sm="6" md="5" lg="4" xl="3" class="custom-padding">
-                      <v-text-field variant="solo" flat v-model="name" :rules="[rules.required]" label="Nome do Material" persistent-placeholder
-                        >
-                      </v-text-field>
+                      <v-text-field v-model="name" :rules="[rules.required]" label="Nome do Material" persistent-placeholder
+                        class="text-field"></v-text-field>
                     </v-col>
                     <v-col cols="12" xs="12" sm="6" md="5" lg="4" xl="3" class="custom-padding">
-                      <v-text-field variant="solo" flat v-model="constant" :rules="[rules.required, rules.isFloat]" persistent-placeholder
-                        label="Constante do Material"></v-text-field>
+                      <v-text-field v-model="constant" :rules="[rules.required, rules.isFloat]" persistent-placeholder
+                        label="Constante do Material (µSv.m2/h.GBq)" class="text-field"></v-text-field>
                     </v-col>
                   </v-row>
                 </v-form>
@@ -43,6 +42,7 @@
     </v-row>
   </v-col>
 </template>
+
 
 <script>
 import {ref, toRef, watch} from "vue";
@@ -112,44 +112,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 * {
   font-family: Poppins-Light;
 }
 
-.v-text-field ::v-deep(.v-field) { border-radius: 10px; }
+.v-text-field {
+  border-radius: 10px;
+  //background-color: #f5f5f5;
+  //box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 .form-title {
   font-family: Poppins-Bold;
-  font-size: 20px;
+  font-size: 22px;
   color: white;
   padding: 10px 0 10px 32px;
 }
 
-.form-subtitle{
-  font-size: 15px;
-  opacity: 0.7;
+.form-subtitle {
+  font-size: 16px;
+  color: #7A7A7A;
   padding: 20px 0 10px 12px;
 }
 
 .back-color {
+  background-color: #2596be;
   border-radius: 10px;
 }
 
 .material-form-fields {
-  background-color: white;
+  background-color: #FFFFFF;
   border-radius: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 20px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.flow-button{
+.flow-button {
   font-family: Poppins-Bold;
+  color: #2596be;
   margin: 10px;
   background-color: transparent;
 }
 
-.dense-form>* {
+.custom-padding {
+  padding: 0 10px;
+}
+
+.dense-form > * {
   padding-top: 0;
   padding-bottom: 0;
   margin-bottom: 0;

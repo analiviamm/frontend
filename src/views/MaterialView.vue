@@ -5,27 +5,35 @@
       <v-col cols="8" sm="10" md="10" lg="11" xl="11" align-self="end" class="main-title">
         Materiais Radioativos
       </v-col>
+    </v-row>
+
     <v-row>
       <v-col cols="12" sm="12" md="12" lg="12" xl="12" class="main-content">
+        <div class="section-header">Criação de Material</div>
+        <p class="section-description">
+          Aqui você pode criar novos materiais radioativos. Preencha os campos abaixo com as informações necessárias.
+        </p>
         <material-form :title="creationMaterialTitle" :subtitle="creationMaterialSubtitle"
-                      :material-object="emptyMaterial" @close_form="hideForm"></material-form>
+                       :material-object="emptyMaterial" @close_form="hideForm"></material-form>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col cols="12" sm="12" md="12" lg="12" xl="12" class="main-content">
         <div class="table-content">
           <div class="table-title">
             Materiais Cadastrados
           </div>
-          <materials-table v-if="materials.length > 0" :materials-list="materials"
-                           ></materials-table>
+          <p class="table-description">
+            Lista de materiais radioativos já existentes. Você pode visualizar os detalhes de cada material abaixo.
+          </p>
+          <materials-table v-if="materials.length > 0" :materials-list="materials"></materials-table>
           <div v-else class="no-materials">
             Não existem materiais cadastrados!
           </div>
         </div>
       </v-col>
       <loader-component v-if='loading' color="#9F365B"></loader-component>
-    </v-row>
     </v-row>
   </v-container>
 </template>
@@ -124,32 +132,52 @@ export default {
 }
 
 .main-title {
-  font-size: 30px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #4A4A4A;
 }
 
 .main-content {
-  justify-content: center;
-  align-items: normal;
-  height: fit-content;
+  margin-top: 20px;
 }
 
-.table-content {
-  border-radius: 10px;
+.section-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4A4A4A;
+  margin-bottom: 10px;
+}
+
+.section-description,
+.table-description {
+  font-size: 16px;
+  color: #7A7A7A;
+  margin-bottom: 20px;
 }
 
 .table-title {
   font-family: Poppins-Bold;
-  font-size: 20px;
-  color: white;
-  padding: 10px 32px 20px 32px;
+  font-size: 22px;
+  color: #FFFFFF;
+  background-color: #2596be;
+  padding: 15px 32px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .no-materials {
   border-radius: 10px;
   padding: 20px;
-  background-color: white;
+  background-color: #FFFFFF;
   display: flex;
   justify-content: center;
+  font-size: 16px;
+  color: #4A4A4A;
 }
 
+.table-content {
+  padding: 20px;
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
 </style>

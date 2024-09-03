@@ -1,20 +1,20 @@
 <template>
-  <v-container class="back-color">
+  <v-container class="processed-container">
     <div class="content-wrapper">
       <div v-if="loading" class="loader-wrapper">
         <LoaderComponent color="#9F365B"></LoaderComponent>
       </div>
-      <div>
+      <div class="data-content">
         <v-row justify="center" class="title-bold">
           <h2>Resultados Obtidos</h2>
           <h3>Abaixo, temos os resultados, para cada possível material radioativo, das possíveis atividades
           e quais as medidas de segurança devem ser tomadas em cada caso.</h3>
         </v-row>
-        <v-row style="padding: 12px;">
-          <span class="patient-bold">Nível de Radiação: {{ radiationLevel }} µSv/h </span>
+        <v-row class="data-row">
+          <span class="data-bold">Nível de Radiação: {{ radiationLevel }} µSv/h </span>
         </v-row>
-        <v-row style="padding: 12px;">
-          <span class="patient-bold">Altitude: {{ altitude }} m </span>
+        <v-row class="data-row">
+          <span class="data-bold">Altitude: {{ altitude }} m </span>
         </v-row>
         <v-row>
           <v-col>
@@ -24,12 +24,12 @@
             </div>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col cols="12" class="text-right">
-            <v-btn class="form-action-btn" @click="emit('dialog_close')">Fechar</v-btn>
-          </v-col>
-        </v-row>
       </div>
+      <v-row class="footer">
+        <v-col cols="12" class="left">
+          <v-btn class="action-btn" @click="emit('dialog_close')">Fechar</v-btn>
+        </v-col>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -94,10 +94,20 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.processed-container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  max-height: 80vh; /* Ajuste conforme necessário */
+  overflow-y: auto;
+}
+
 .content-wrapper {
-  background-color: white;
+  background-color: #FFFFFF;
   border-radius: 10px;
   padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: calc(100vh - 60px); /* Garante que o conteúdo tenha altura mínima suficiente */
+  position: relative;
 }
 
 .loader-wrapper {
@@ -107,31 +117,41 @@ onMounted(() => {
   height: 100px;
 }
 
-.v-row {
-  margin: 0;
-  padding: 0;
-}
-
 .title-bold {
   font-family: Poppins-Bold;
   font-size: 20px;
   text-align: center;
+  color: #2596be;
 }
 
-.patient-bold {
+.data-bold {
   font-family: Poppins-Bold;
+  font-size: 16px;
+  color: #7A7A7A;
 }
 
-.back-color {
-  padding: 10px 0;
-  border-radius: 10px;
+.data-row {
+  padding: 12px 0;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
   background-color: #f5f5f5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid #ddd;
 }
 
-.form-action-btn {
+.action-btn {
   font-family: Poppins-Bold;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+  color: #2596be;
+  border-radius: 10px;
+  text-transform: none;
+}
+
+.action-btn:hover {
+  background-color: #1a76d2;
 }
 </style>
+

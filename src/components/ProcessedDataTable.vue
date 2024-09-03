@@ -6,7 +6,7 @@
     <v-col cols="6" class="table-title">Medidas de Precaução</v-col>
   </v-row>
   <v-row class="table-content" v-for="data in processed_data" :key="data.id">
-        <processed-data-table-line :processed-data-object="data"></processed-data-table-line>
+    <processed-data-table-line :processed-data-object="data"></processed-data-table-line>
   </v-row>
 </template>
 
@@ -23,7 +23,7 @@ const processed_data = toRef(props, 'processedDataList')
 
 <style scoped>
 .table-header {
-  background-color: #f2f2f2;
+  background-color: #f5f5f5;
   font-family: Poppins-Bold;
   border-bottom: 2px solid #ddd;
   padding: 10px 0;
@@ -35,11 +35,13 @@ const processed_data = toRef(props, 'processedDataList')
 }
 
 .table-title {
-  font-weight: bold;
+  font-family: Poppins-Bold;
   text-align: center;
+  color: #2596be;
 }
 
 .v-row {
   margin: 0;
+  padding: 0;
 }
 </style>

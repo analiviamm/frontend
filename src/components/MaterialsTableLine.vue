@@ -1,12 +1,11 @@
 <template>
   <v-row class="table-row">
-    <v-col class ="col" cols="4">
+    <v-col class="col" cols="4">
       <span>{{ name }}</span>
     </v-col>
-    <v-col class ="col" cols="4">
+    <v-col class="col" cols="4">
       <span>{{ constant }}</span>
     </v-col>
-
   </v-row>
 </template>
 
@@ -31,13 +30,11 @@ const constant = material.value.constant
   align-items: center;
 }
 
-
 .col {
-  flex: 1; /* Faz com que todas as colunas tenham a mesma largura */
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center; /* Opcional: centraliza o conteúdo das colunas */
-  word-break: break-word; /* Garante que o texto não saia da coluna */
+  justify-content: center;
+  word-break: break-word;
 }
-
 </style>
