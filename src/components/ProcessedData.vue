@@ -29,7 +29,7 @@
         <v-col cols="10" class="left">
           <v-btn class="action-btn" @click="emit('dialog_close', false)">Fechar</v-btn>
         </v-col>
-        <v-col cols="2" class="right d-flex">
+        <v-col v-if="!oldResult" cols="2" class="right d-flex">
           <v-btn class="action-btn" @click="saveResult">Salvar Resultado</v-btn>
         </v-col>
       </v-row>
@@ -46,7 +46,8 @@ import ProcessedDataTable from "@/components/ProcessedDataTable.vue";
 
 const props = defineProps({
   radiationLevel: Number,
-  altitude: Number
+  altitude: Number,
+  oldResult: Boolean
 })
 
 const emit = defineEmits([
@@ -55,6 +56,7 @@ const emit = defineEmits([
 
 const radiationLevel = ref(props.radiationLevel)
 const altitude = ref(props.altitude)
+const oldResult = ref(props.oldResult)
 const processed_data = ref([])
 
 const loading = ref(false)

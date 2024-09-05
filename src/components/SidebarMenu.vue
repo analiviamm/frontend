@@ -28,6 +28,11 @@
             Materiais
           </v-btn>
         </router-link>
+        <router-link to="/previous_results" v-slot="{ navigate }" style="text-decoration: none">
+          <v-btn role="link" @click="navigate" class="list-link">
+            Resultados Anteriores
+          </v-btn>
+        </router-link>
         <v-btn icon @click="toggleDrawer" class="close-button">
           <v-icon>mdi-close</v-icon>
         </v-btn>

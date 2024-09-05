@@ -36,7 +36,7 @@
     </v-row>
     <v-dialog v-model="showProcessedDataDialog" persistent>
       <processed-data @dialog_close="closeProcessedData"
-        :radiation-level="parseFloat(radiationLevel)" :altitude="parseFloat(altitude)"></processed-data>
+        :radiation-level="parseFloat(radiationLevel)" :altitude="parseFloat(altitude)" :old-result="false"></processed-data>
     </v-dialog>
 
     <v-dialog v-model="showSuccessDialog" max-width="400">
