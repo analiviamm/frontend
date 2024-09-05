@@ -38,6 +38,17 @@
       <processed-data @dialog_close="closeProcessedData"
         :radiation-level="parseFloat(radiationLevel)" :altitude="parseFloat(altitude)"></processed-data>
     </v-dialog>
+
+    <v-dialog v-model="showSuccessDialog" max-width="400">
+      <v-card>
+        <v-card-title class="headline">Sucesso</v-card-title>
+        <v-card-text>O resultado foi salvo com sucesso!</v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" text @click="showSuccessDialog = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </v-container>
 </template>
 
@@ -54,8 +65,15 @@ export default {
     const radiationLevel = ref(null);
     const altitude = ref(null);
     const showProcessedDataDialog = ref(false);
+    const showSuccessDialog = ref(false)
 
-    const closeProcessedData = () => showProcessedDataDialog.value = false;
+    function closeProcessedData(saved) {
+      showProcessedDataDialog.value = false
+      if(saved) {
+        showSuccessDialog.value = true
+      }
+
+    }
 
     function generateData() {
       showProcessedDataDialog.value = true;
@@ -77,6 +95,7 @@ export default {
       generateData,
       rules,
       showProcessedDataDialog,
+      showSuccessDialog,
       closeProcessedData
     };
   },

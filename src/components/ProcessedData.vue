@@ -25,12 +25,26 @@
           </v-col>
         </v-row>
       </div>
-      <v-row class="footer">
-        <v-col cols="12" class="left">
-          <v-btn class="action-btn" @click="emit('dialog_close')">Fechar</v-btn>
+      <v-row class="footer" >
+        <v-col cols="10" class="left">
+          <v-btn class="action-btn" @click="emit('dialog_close', false)">Fechar</v-btn>
+        </v-col>
+        <v-col cols="2" class="right d-flex">
+          <v-btn class="action-btn" @click="saveResult">Salvar Resultado</v-btn>
         </v-col>
       </v-row>
     </div>
+
+    <v-dialog v-model="showSuccessDialog" max-width="400">
+      <v-card>
+        <v-card-title class="headline">Sucesso</v-card-title>
+        <v-card-text>O resultado foi salvo com sucesso!</v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" text @click="showSuccessDialog = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </v-container>
 </template>
 
@@ -56,6 +70,8 @@ const processed_data = ref([])
 
 const loading = ref(false)
 const loadingProcessedData = ref(false)
+const showSuccessDialog = ref(false)
+
 
 async function getProcessedDataBackend(radiationLevel, altitude) {
   try {
@@ -85,6 +101,29 @@ async function getProcessedData(radiationLevel, altitude) {
   } finally {
     loading.value = false;
     loadingProcessedData.value = false;
+  }
+}
+
+async function saveResult() {
+  const today = new Date().toISOString().split('T')[0]
+  console.log(today)
+  try {
+    const response = await axios.post('/create_result/', {
+      date: today,
+      radiation_level: radiationLevel.value,
+      altitude: altitude.value
+    })
+
+    if (response.status === 201) {
+      emit('dialog_close', true)
+      setTimeout(() => {
+        showSuccessDialog.value = true; // Exibe o diálogo de sucesso
+      }, 2000);
+    } else {
+      console.error('Erro ao salvar o resultado:', response.status)
+    }
+  } catch (error) {
+    console.error('Erro ao salvar o resultado:', error)
   }
 }
 
