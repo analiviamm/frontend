@@ -34,17 +34,6 @@
         </v-col>
       </v-row>
     </div>
-
-    <v-dialog v-model="showSuccessDialog" max-width="400">
-      <v-card>
-        <v-card-title class="headline">Sucesso</v-card-title>
-        <v-card-text>O resultado foi salvo com sucesso!</v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" text @click="showSuccessDialog = false">OK</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
   </v-container>
 </template>
 
@@ -70,7 +59,6 @@ const processed_data = ref([])
 
 const loading = ref(false)
 const loadingProcessedData = ref(false)
-const showSuccessDialog = ref(false)
 
 
 async function getProcessedDataBackend(radiationLevel, altitude) {
@@ -116,9 +104,6 @@ async function saveResult() {
 
     if (response.status === 201) {
       emit('dialog_close', true)
-      setTimeout(() => {
-        showSuccessDialog.value = true; // Exibe o diálogo de sucesso
-      }, 2000);
     } else {
       console.error('Erro ao salvar o resultado:', response.status)
     }
