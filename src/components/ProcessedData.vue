@@ -194,7 +194,15 @@ async function saveResult() {
     const response = await axios.post('/create_result/', {
       date: today,
       radiation_level: radiationLevel.value,
-      altitude: altitude.value
+      altitude: altitude.value,
+      min_radius: min_radius.value,
+      access_restrict: access_restrict.value,
+      tireoide_monitoring: tireoide_monitoring.value,
+      aliment_restrict: aliment_restrict.value,
+      people_reallocation: people_reallocation.value,
+      immediate_evacuation: immediate_evacuation.value,
+      first_minute_contact: first_minute_contact.value,
+      second_minute_contact: second_minute_contact.value
     })
 
     if (response.status === 201) {
