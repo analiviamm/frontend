@@ -7,23 +7,18 @@
       <div class="data-content">
         <v-row justify="center" class="title-bold">
           <h2>Resultados Obtidos</h2>
-          <h3>Abaixo, temos os resultados, para cada possível material radioativo, das possíveis atividades
-          e quais as medidas de segurança devem ser tomadas em cada caso.</h3>
+          <h3>Abaixo, temos o raio mínimo para a dose segura de 0.1 µSv/h e as recomendações de segurança gerais para a dose informada.</h3>
         </v-row>
         <v-row class="data-row">
-          <span class="data-bold">Nível de Radiação: {{ radiationLevel }} µSv/h </span>
+          <h4 class="data-bold">Nível de Radiação: </h4> <span class="data-bold"> {{ radiationLevel }} µSv/h </span>
         </v-row>
         <v-row class="data-row">
-          <span class="data-bold">Altitude: {{ altitude }} m </span>
+          <h4 class="data-bold">Altitude: </h4> <span class="data-bold"> {{ altitude }} m </span>
         </v-row>
-        <v-row>
-          <v-col>
-            <loader-component v-if='loadingProcessedData' color="#9F365B"></loader-component>
-            <div v-else v-show="processed_data.length > 0 || loadingProcessedData">
-              <processed-data-table :processed-data-list="processed_data"></processed-data-table>
-            </div>
-          </v-col>
+        <v-row class="data-row">
+          <h4 class="data-bold">Raio de Segurança Mínimo: </h4> <span class="data-bold"> {{ min_radius }} m </span>
         </v-row>
+
       </div>
       <v-row class="footer" >
         <v-col cols="10" class="left">
@@ -38,11 +33,10 @@
 </template>
 
 <script setup>
-import {ref, defineProps, defineEmits, onMounted} from "vue";
+import {ref, defineProps, defineEmits, computed} from "vue";
 import axios from "axios";
 
 import LoaderComponent from "@/components/LoaderComponent.vue";
-import ProcessedDataTable from "@/components/ProcessedDataTable.vue";
 
 const props = defineProps({
   radiationLevel: Number,
@@ -57,42 +51,10 @@ const emit = defineEmits([
 const radiationLevel = ref(props.radiationLevel)
 const altitude = ref(props.altitude)
 const oldResult = ref(props.oldResult)
-const processed_data = ref([])
-
 const loading = ref(false)
-const loadingProcessedData = ref(false)
+const min_radius = computed(() => Math.sqrt(radiationLevel.value * altitude.value * altitude.value / 0.1))
 
 
-async function getProcessedDataBackend(radiationLevel, altitude) {
-  try {
-    const response = await axios.get('calculate_activity/', {
-      params: {
-        radiation_level: radiationLevel,
-        altitude: altitude
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching data from backend:', error);
-    return [];
-  }
-}
-
-async function getProcessedData(radiationLevel, altitude) {
-  loading.value = true
-  loadingProcessedData.value = true
-  try {
-    const responseProcessedData = await getProcessedDataBackend(radiationLevel, altitude);
-    processed_data.value = responseProcessedData.map(item => ({
-      ...item
-    }));
-  } catch (error) {
-    console.error('Error processing data:', error);
-  } finally {
-    loading.value = false;
-    loadingProcessedData.value = false;
-  }
-}
 
 async function saveResult() {
   const today = new Date().toISOString().split('T')[0]
@@ -114,9 +76,6 @@ async function saveResult() {
   }
 }
 
-onMounted(() => {
-  getProcessedData(radiationLevel.value, altitude.value)
-})
 </script>
 
 <style scoped>
@@ -132,7 +91,7 @@ onMounted(() => {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  min-height: calc(100vh - 60px); /* Garante que o conteúdo tenha altura mínima suficiente */
+  //min-height: calc(100vh - 60px); /* Garante que o conteúdo tenha altura mínima suficiente */
   position: relative;
 }
 

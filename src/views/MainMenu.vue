@@ -35,15 +35,6 @@
         class="mb-5"
         cols="12"
       >
-        <router-link to="/materials">
-          <v-btn class="action-btn">Materiais</v-btn>
-        </router-link>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
         <router-link to="/previous_results">
           <v-btn class="action-btn">Resultados Anteriores</v-btn>
         </router-link>

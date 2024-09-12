@@ -23,11 +23,6 @@
             Gerar Dados
           </v-btn>
         </router-link>
-        <router-link to="/materials" v-slot="{ navigate }" style="text-decoration: none">
-          <v-btn role="link" @click="navigate" class="list-link">
-            Materiais
-          </v-btn>
-        </router-link>
         <router-link to="/previous_results" v-slot="{ navigate }" style="text-decoration: none">
           <v-btn role="link" @click="navigate" class="list-link">
             Resultados Anteriores
