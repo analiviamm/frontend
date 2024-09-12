@@ -19,7 +19,7 @@
         <previous-result-table
           v-else
           :previous-results-list="previous_results"
-          @open_result="openProcessedData"
+          @open_result="openProcessedData" @exclude="excludeResult"
         ></previous-result-table>
       </v-col>
     </v-row>
@@ -69,6 +69,15 @@ function openProcessedData(radiation_level, altitude_value) {
 
 function closeProcessedData() {
   showProcessedDataDialog.value = false;
+}
+
+function excludeResult(data) {
+      for (let i = 0; i < previous_results.value.length; i++) {
+        let previous_result = previous_results.value[i];
+        if (previous_result['id'] === data['excluded_id']) {
+          previous_results.value.splice(i, 1)
+        }
+      }
 }
 
 onMounted(() => {
