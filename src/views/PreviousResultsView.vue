@@ -4,15 +4,15 @@
 
     <v-row class="text-center">
       <v-col cols="8" sm="10" md="10" lg="11" xl="11" align-self="end" class="main-title">
-        Resultados Anteriores
+        Histórico de Dados
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="12" sm="12" md="12" lg="12" xl="12" class="main-content">
-        <div class="section-header">Histórico de Resultados</div>
+        <div class="section-header">Histórico de Dados</div>
         <p class="section-description">
-          Abaixo estão os resultados anteriores que foram salvos, ordenados por data. Clique em "Ver Resultados" para
+          Abaixo estão os resultados anteriores que foram salvos, ordenados por data. Clique em "Ver Relatório" para
           visualizar os detalhes de cada linha.
         </p>
         <loader-component v-if='loadingPreviousResults' color="#9F365B"></loader-component>

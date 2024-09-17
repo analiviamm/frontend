@@ -29,7 +29,7 @@
               :rules="[rules.float]"
               class="input-field"
             />
-            <v-btn @click="generateData" class="input-btn">GERAR DADOS</v-btn>
+            <v-btn @click="generateData" class="input-btn">GERAR RELATÓRIO</v-btn>
           </v-form>
         </v-card-text>
       </v-card>

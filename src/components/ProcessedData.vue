@@ -221,7 +221,7 @@ async function saveResult() {
 .processed-container {
   padding: 20px;
   background-color: #f5f5f5;
-  max-height: 80vh;
+  max-height: 100vh;
   overflow-y: auto;
 }
 

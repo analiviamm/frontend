@@ -20,12 +20,12 @@
         </router-link>
         <router-link to="/input_data" v-slot="{ navigate }" style="text-decoration: none">
           <v-btn role="link" @click="navigate" class="list-link">
-            Gerar Dados
+            Gerar Relatório
           </v-btn>
         </router-link>
         <router-link to="/previous_results" v-slot="{ navigate }" style="text-decoration: none">
           <v-btn role="link" @click="navigate" class="list-link">
-            Resultados Anteriores
+            Histórico de Dados
           </v-btn>
         </router-link>
         <v-btn icon @click="toggleDrawer" class="close-button">

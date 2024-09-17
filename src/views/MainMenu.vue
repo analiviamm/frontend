@@ -27,7 +27,7 @@
         cols="12"
       >
         <router-link to="/input_data">
-          <v-btn class="action-btn">Gerar Dados</v-btn>
+          <v-btn class="action-btn">Gerar Relatório</v-btn>
         </router-link>
       </v-col>
 
@@ -36,7 +36,7 @@
         cols="12"
       >
         <router-link to="/previous_results">
-          <v-btn class="action-btn">Resultados Anteriores</v-btn>
+          <v-btn class="action-btn">Histórico de Dados</v-btn>
         </router-link>
       </v-col>
 

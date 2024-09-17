@@ -10,7 +10,7 @@
       <span>{{ altitude }}</span>
     </v-col>
     <v-col class="col" cols="3">
-      <v-btn @click="emitResult">Ver resultado</v-btn>
+      <v-btn @click="emitResult">Ver Relatório</v-btn>
     </v-col>
     <v-col class="col" cols="3">
       <v-btn @click="handleExclusionDialogOpening">Excluir</v-btn>
@@ -18,8 +18,8 @@
   </v-row>
   <v-dialog v-model="exclusionDialog" max-width="400">
       <v-card>
-        <v-card-title class="headline">Excluir Resultado?</v-card-title>
-        <v-card-text>Deseja realmente excluir esse resultado?</v-card-text>
+        <v-card-title class="headline">Excluir resultado?</v-card-title>
+        <v-card-text>Deseja realmente excluir esse resultaod?</v-card-text>
         <v-card-actions>
           <v-btn color="primary" text @click="handleExclusionDialogClosing(false)">Cancelar</v-btn>
           <v-btn color="primary" text @click="handleExclusionDialogClosing(true)">Excluir</v-btn>

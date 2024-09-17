@@ -3,7 +3,7 @@
     <v-col cols="2" class="table-title">Data</v-col>
     <v-col cols="2" class="table-title">Nível de Radiação (µSv/h)</v-col>
     <v-col cols="2" class="table-title">Altitude (m)</v-col>
-    <v-col cols="3" class="table-title">Resultado</v-col>
+    <v-col cols="3" class="table-title">Relatório</v-col>
     <v-col cols="3" class="table-title">Excluir</v-col>
   </v-row>
   <v-row class="table-content" v-for="data in previous_results" :key="data.id">
