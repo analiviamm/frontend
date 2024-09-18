@@ -13,10 +13,13 @@
       <v-icon @click="openFlightDetailsDialog">mdi-notebook</v-icon> <!-- Ícone de caderno -->
     </v-col>
     <v-col class="col" cols="2">
-      <v-btn @click="emitResult">Ver Relatório</v-btn>
+      <v-icon @click="emitResult" class="action-icon">mdi-file-document</v-icon>
     </v-col>
-    <v-col class="col" cols="2">
-      <v-btn @click="handleExclusionDialogOpening">Excluir</v-btn>
+    <v-col class="col" cols="1">
+      <v-icon @click="openEditDialog" class="action-icon">mdi-pencil</v-icon>
+    </v-col>
+    <v-col class="col" cols="1">
+      <v-icon @click="handleExclusionDialogOpening" class="action-icon">mdi-delete</v-icon>
     </v-col>
   </v-row>
 
@@ -39,18 +42,25 @@
           <v-btn color="primary" text @click="handleExclusionDialogClosing(true)">Excluir</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+  </v-dialog>
+
+  <edit-result-dialog
+    v-model="editDialog"
+    :result-data="data"
+    @close="closeEditDialog"
+  />
 </template>
 
 <script setup>
 import {defineProps, defineEmits, ref, toRef} from "vue";
 import axios from "axios";
+import EditResultDialog from "@/components/EditResultDialog.vue";
 
 const props = defineProps({
   previousResultsObject: Object,
 })
 
-const emit = defineEmits(['open_result', 'exclude_result'])
+const emit = defineEmits(['open_result', 'exclude_result', 'saved'])
 
 const data = toRef(props, "previousResultsObject")
 
@@ -63,6 +73,7 @@ const flight_description = data.value.flight_description
 
 const exclusionDialog = ref(false)
 const flightDetailsDialog = ref(false)
+const editDialog = ref(false);
 
 function openFlightDetailsDialog() {
   flightDetailsDialog.value = true;
@@ -70,6 +81,17 @@ function openFlightDetailsDialog() {
 
 function closeFlightDetailsDialog() {
   flightDetailsDialog.value = false;
+}
+
+function openEditDialog() {
+  editDialog.value = true;
+}
+
+function closeEditDialog(saved) {
+  if(saved) {
+    emit('saved')
+  }
+  editDialog.value = false;
 }
 const handleExclusionDialogOpening = () => exclusionDialog.value = true
 

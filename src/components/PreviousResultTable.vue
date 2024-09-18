@@ -5,12 +5,14 @@
     <v-col cols="2" class="table-title">Altitude (m)</v-col>
     <v-col cols="2" class="table-title">Detalhes do Voo</v-col>
     <v-col cols="2" class="table-title">Relatório</v-col>
-    <v-col cols="2" class="table-title">Excluir</v-col>
+    <v-col cols="1" class="table-title">Editar</v-col>
+    <v-col cols="1" class="table-title">Excluir</v-col>
   </v-row>
   <v-row class="table-content" v-for="data in previous_results" :key="data.id">
     <previous-result-table-line :previous-results-object="data"
                                 @open_result="handleOpenResult" @exclude_result="handleResultExclusion"
-                                @view_flight_details="handleViewFlightDetails"></previous-result-table-line>
+                                @saved="handleEdition"
+                                ></previous-result-table-line>
   </v-row>
 </template>
 
@@ -22,7 +24,7 @@ const props = defineProps({
   previousResultsList: Array,
 })
 
-const emit = defineEmits(['open_result', 'exclude', 'view_flight_details']);
+const emit = defineEmits(['open_result', 'exclude', 'handle_edition']);
 
 const previous_results = toRef(props, 'previousResultsList')
 
@@ -34,10 +36,9 @@ function handleResultExclusion(selectedResult) {
       emit('exclude', { ...selectedResult })
 }
 
-function handleViewFlightDetails(flight_description) {
-  emit('view_flight_details', flight_description);
+function handleEdition() {
+  emit('handle_edition')
 }
-
 </script>
 
 <style scoped>

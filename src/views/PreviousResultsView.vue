@@ -19,7 +19,7 @@
         <previous-result-table
           v-else
           :previous-results-list="previous_results"
-          @open_result="openProcessedData" @exclude="excludeResult"
+          @open_result="openProcessedData" @exclude="excludeResult" @handle_edition="getPreviousResults"
         ></previous-result-table>
       </v-col>
     </v-row>
