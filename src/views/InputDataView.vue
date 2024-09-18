@@ -29,6 +29,14 @@
               :rules="[rules.float]"
               class="input-field"
             />
+            <v-text-field
+              v-model="flightDescription"
+              label="Detalhes do Voo"
+              outlined
+              dense
+              class="input-field"
+              placeholder="Insira aqui informações relevantes sobre o voo."
+            />
             <v-btn @click="generateData" class="input-btn">GERAR RELATÓRIO</v-btn>
           </v-form>
         </v-card-text>
@@ -36,7 +44,8 @@
     </v-row>
     <v-dialog v-model="showProcessedDataDialog" persistent>
       <processed-data @dialog_close="closeProcessedData"
-        :radiation-level="parseFloat(radiationLevel)" :altitude="parseFloat(altitude)" :old-result="false"></processed-data>
+        :radiation-level="parseFloat(radiationLevel)" :altitude="parseFloat(altitude)"
+                      :flight-description="flightDescription" :old-result="false"></processed-data>
     </v-dialog>
 
     <v-dialog v-model="showSuccessDialog" max-width="400">
@@ -64,6 +73,7 @@ export default {
   setup() {
     const radiationLevel = ref(null);
     const altitude = ref(null);
+    const flightDescription = ref(null)
     const showProcessedDataDialog = ref(false);
     const showSuccessDialog = ref(false)
 
@@ -92,6 +102,7 @@ export default {
     return {
       radiationLevel,
       altitude,
+      flightDescription,
       generateData,
       rules,
       showProcessedDataDialog,

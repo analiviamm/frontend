@@ -16,12 +16,16 @@
           <span class="data-bold">{{ radiationLevel }} µSv/h </span>
         </v-row>
         <v-row class="data-row">
-          <h4 class="data-bold">Altitude: </h4>
-          <span class="data-bold">{{ altitude }} m </span>
+          <h4 class="data-bold">Altitude:  </h4>
+          <span class="data-bold">  {{ altitude }} m </span>
         </v-row>
         <v-row class="data-row">
-          <h4 class="data-bold">Raio de Segurança Mínimo: </h4>
-          <span class="data-bold">{{ min_radius.toFixed(2) }} m </span>
+          <h4 class="data-bold">Detalhes do voo:  </h4>
+          <span class="data-bold">  {{ flightDescription }} </span>
+        </v-row>
+        <v-row class="data-row">
+          <h4 class="data-bold">Raio de Segurança Mínimo:  </h4>
+          <span class="data-bold">  {{ min_radius.toFixed(2) }} m </span>
         </v-row>
 
         <!-- Tabela de recomendações -->
@@ -163,13 +167,15 @@ import LoaderComponent from "@/components/LoaderComponent.vue";
 const props = defineProps({
   radiationLevel: Number,
   altitude: Number,
-  oldResult: Boolean
+  oldResult: Boolean,
+  flightDescription: String
 })
 
 const emit = defineEmits(['dialog_close'])
 
 const radiationLevel = ref(props.radiationLevel)
 const altitude = ref(props.altitude)
+const flightDescription = ref(props.flightDescription)
 const oldResult = ref(props.oldResult)
 const loading = ref(false)
 const min_radius = computed(() => Math.sqrt(radiationLevel.value * altitude.value * altitude.value / 0.1))
@@ -195,6 +201,7 @@ async function saveResult() {
       date: today,
       radiation_level: radiationLevel.value,
       altitude: altitude.value,
+      flight_description: flightDescription.value,
       min_radius: min_radius.value,
       access_restrict: access_restrict.value,
       tireoide_monitoring: tireoide_monitoring.value,

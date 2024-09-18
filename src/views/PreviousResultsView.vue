@@ -29,6 +29,7 @@
         @dialog_close="closeProcessedData"
         :radiation-level="parseFloat(radiationLevel)"
         :altitude="parseFloat(altitude)"
+        :flight-description="flightDescription"
         :old-result="true">
       </processed-data>
     </v-dialog>
@@ -48,6 +49,7 @@ const loadingPreviousResults = ref(false);
 const showProcessedDataDialog = ref(false);
 const radiationLevel = ref(null);
 const altitude = ref(null);
+const flightDescription = ref(null);
 
 async function getPreviousResults() {
   loadingPreviousResults.value = true;
@@ -61,9 +63,10 @@ async function getPreviousResults() {
   }
 }
 
-function openProcessedData(radiation_level, altitude_value) {
+function openProcessedData(radiation_level, altitude_value, flight_description) {
   radiationLevel.value = radiation_level;
   altitude.value = altitude_value;
+  flightDescription.value = flight_description
   showProcessedDataDialog.value = true;
 }
 
