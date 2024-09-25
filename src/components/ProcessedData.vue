@@ -51,23 +51,34 @@
                   </td>
                 </tr>
                 <tr @click="toggleRow(1)">
-                  <td>Monitoramento de Tireóide</td>
-                  <td>{{ tireoide_monitoring.toFixed(2) }}</td>
+                  <td>Equipe de Segurança</td>
+                  <td>{{ security_team.toFixed(2) }}</td>
                 </tr>
                 <tr v-if="showDetails[1]">
                   <td colspan="2">
-                    Todo pessoal numa área igual ou menor
+                    Para equipe de segurança (bombeiros ou pessoal do batalhão)
+                    que não estejam com dosímetro ou equipamentos de segurança,
+                    deve-se restringir o acesso até essa distância.
+                  </td>
+                </tr>
+                <tr @click="toggleRow(2)">
+                  <td>Monitoramento de Tireóide</td>
+                  <td>{{ tireoide_monitoring.toFixed(2) }}</td>
+                </tr>
+                <tr v-if="showDetails[2]">
+                  <td colspan="2">
+                    Todo pessoal que esteve numa área igual ou menor
                     que esta distância deve examinar o estado
                     da tireóide e tomar bloqueantes de Iodo
                     assim que possível, se disponíveis.
 
                   </td>
                 </tr>
-                <tr @click="toggleRow(2)">
+                <tr @click="toggleRow(3)">
                   <td>Restrição de Alimentos</td>
                   <td>{{ aliment_restrict.toFixed(2) }}</td>
                 </tr>
-                <tr v-if="showDetails[2]">
+                <tr v-if="showDetails[3]">
                   <td colspan="2">
                     Não consumir água ou alimentos que se
                     encontravam dentro desse raio. Além disso,
@@ -78,25 +89,25 @@
                     contaminada.
                   </td>
                 </tr>
-                <tr @click="toggleRow(3)">
+                <tr @click="toggleRow(4)">
                   <td>Realocar Pessoal e Civis</td>
                   <td>{{ people_reallocation.toFixed(2) }}</td>
                 </tr>
-                <tr v-if="showDetails[3]">
+                <tr v-if="showDetails[4]">
                   <td colspan="2">
                     Num raio menor que esse, não deve ser
                     permitido acesso de nenhuma pessoa, a
                     não ser que autorizado para medida de
-                    segurança. A realocação deve ser feita o
+                    segurança justificável. A realocação deve ser feita o
                     mais depressa possível, de forma a manter
                     a integridade física de todos os evacuados.
                   </td>
                 </tr>
-                <tr @click="toggleRow(4)">
+                <tr @click="toggleRow(5)">
                   <td>Evacuação Imediata ou Abrigagem</td>
                   <td>{{ immediate_evacuation.toFixed(2) }}</td>
                 </tr>
-                <tr v-if="showDetails[4]">
+                <tr v-if="showDetails[5]">
                   <td colspan="2">
                     Todas as pessoas no raio estipulado devem
                     evacuar imediatamente ou se abrigar de
@@ -108,6 +119,7 @@
                   </td>
                 </tr>
               </tbody>
+              <caption>Distâncias recomendadas para medidas de segurança em diferentes situações.</caption>
             </v-simple-table>
           </v-col>
         </v-row>
@@ -137,10 +149,10 @@
             Além disso, devem ser realizadas por voluntários e estes devem ser instruídos sobre os riscos para a saúde, os dispositivos de segurança disponíveis, além de serem treinados.
           </p>
           <p class="highlight-text">
-            Sendo assim, após tomada de decisão, estima-se que um contato de <strong>{{ first_minute_contact }} minutos</strong> com essa fonte (à 1m de distância) seja suficiente para causar dose de 50mSv ou superior.
+            Sendo assim, após tomada de decisão, estima-se que um contato de <strong>{{ first_minute_contact.toFixed(2) }} minutos</strong> com essa fonte (à 1m de distância) seja suficiente para causar dose de 50mSv ou superior.
           </p>
           <p class="highlight-text">
-            Caso a exposição ultrapasse <strong>{{ second_minute_contact }} minutos</strong>, a dose chegará a 100mSv e é mandatório que o trabalhador de emergência seja consultado por médico competente para avaliação.
+            Caso a exposição ultrapasse <strong>{{ second_minute_contact.toFixed(2) }} minutos</strong>, a dose chegará a 100mSv e é mandatório que o trabalhador de emergência seja consultado por médico competente para avaliação.
           </p>
         </v-row>
       </div>
@@ -180,6 +192,7 @@ const oldResult = ref(props.oldResult)
 const loading = ref(false)
 const min_radius = computed(() => Math.sqrt(radiationLevel.value * altitude.value * altitude.value / 0.1))
 const access_restrict = computed(() => Math.sqrt(radiationLevel.value*altitude.value*altitude.value/0.116))
+const security_team = computed(() => Math.sqrt(radiationLevel.value*altitude.value*altitude.value/0.232))
 const tireoide_monitoring = computed(() => Math.sqrt(radiationLevel.value*altitude.value*altitude.value/0.6))
 const aliment_restrict = computed(() => Math.sqrt(radiationLevel.value * altitude.value * altitude.value))
 const people_reallocation = computed(() => Math.sqrt(radiationLevel.value*altitude.value*altitude.value/100))
@@ -187,7 +200,7 @@ const immediate_evacuation = computed(() => Math.sqrt(radiationLevel.value*altit
 const first_minute_contact = computed(() => (50000*60/(radiationLevel.value*altitude.value*altitude.value)))
 const second_minute_contact = computed(() => (100000*60/(radiationLevel.value*altitude.value*altitude.value)))
 
-const showDetails = ref([false, false, false, false, false]);
+const showDetails = ref([false, false, false, false, false, false]);
 
 function toggleRow(index) {
   showDetails.value[index] = !showDetails.value[index];
@@ -204,6 +217,7 @@ async function saveResult() {
       flight_description: flightDescription.value,
       min_radius: min_radius.value,
       access_restrict: access_restrict.value,
+      security_team: security_team.value,
       tireoide_monitoring: tireoide_monitoring.value,
       aliment_restrict: aliment_restrict.value,
       people_reallocation: people_reallocation.value,

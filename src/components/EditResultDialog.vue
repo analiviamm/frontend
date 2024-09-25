@@ -59,6 +59,7 @@ const flight_description = ref(data.value.flight_description)
 
 const min_radius = computed(() => Math.sqrt(radiation_level.value * altitude.value * altitude.value / 0.1))
 const access_restrict = computed(() => Math.sqrt(radiation_level.value*altitude.value*altitude.value/0.116))
+const security_team = computed(() => Math.sqrt(radiation_level.value*altitude.value*altitude.value/0.232))
 const tireoide_monitoring = computed(() => Math.sqrt(radiation_level.value*altitude.value*altitude.value/0.6))
 const aliment_restrict = computed(() => Math.sqrt(radiation_level.value * altitude.value * altitude.value))
 const people_reallocation = computed(() => Math.sqrt(radiation_level.value*altitude.value*altitude.value/100))
@@ -79,6 +80,7 @@ async function editResult(resultId) {
       flight_description: flight_description.value,
       min_radius: min_radius.value,
       access_restrict: access_restrict.value,
+      security_team: security_team.value,
       tireoide_monitoring: tireoide_monitoring.value,
       aliment_restrict: aliment_restrict.value,
       people_reallocation: people_reallocation.value,
